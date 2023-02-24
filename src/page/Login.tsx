@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom';
 export default function Login() {
   const navigate = useNavigate();
 
-  function handleRegister() {
-    navigate('/register');
-  }
   function handleSignin() {
     navigate('/');
   }
@@ -20,7 +17,7 @@ export default function Login() {
               src='http://hrms.channakyasoft.com/assets/HRMS.png'
               alt='Channakya Software(dev team)'
             />
-            <h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
+            <h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-12'>
               Sign in to your account
             </h2>
           </div>
@@ -37,7 +34,7 @@ export default function Login() {
                   type='email'
                   autoComplete='email'
                   required
-                  className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+                  className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-10 px-3 py-2 text-gray-12 placeholder-gray-10 focus:z-10 focus:border-primary-12 focus:outline-none focus:ring-primary-12 sm:text-sm'
                   placeholder='Email address'
                 />
               </div>
@@ -51,7 +48,7 @@ export default function Login() {
                   type='password'
                   autoComplete='current-password'
                   required
-                  className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+                  className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-10 px-3 py-2 text-gray-12 placeholder-gray-10 focus:z-10 focus:border-primary-10 focus:outline-none focus:ring-primary-10 sm:text-sm'
                   placeholder='Password'
                 />
               </div>
@@ -63,7 +60,7 @@ export default function Login() {
                   id='remember-me'
                   name='remember-me'
                   type='checkbox'
-                  className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                  className='h-4 w-4 rounded border-gray-9 text-primary-8 focus:ring-primary-10'
                 />
                 <label
                   htmlFor='remember-me'
@@ -73,7 +70,7 @@ export default function Login() {
                 </label>
               </div>
 
-              <div className='text-sm'>
+              {/* <div className='text-sm'>
                 <a
                   href='#'
                   onClick={handleRegister}
@@ -81,13 +78,13 @@ export default function Login() {
                 >
                   Don't have an account?
                 </a>
-              </div>
+              </div> */}
             </div>
 
             <div>
               <button
                 type='submit'
-                className='group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                className='group relative flex w-full justify-center rounded-md border border-transparent bg-primary-8 py-2 px-4 text-sm font-medium text-white hover:bg-primary-10 focus:outline-none focus:ring-2 focus:ring-primary-10 focus:ring-offset-2'
               >
                 <span className='absolute inset-y-0 left-0 flex items-center pl-3'>
                   <AiFillLock

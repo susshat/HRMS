@@ -1,7 +1,5 @@
 import { NavItems } from '../constants/navItems';
 import SideBarItem from './SideBarItem';
-import Navlist from './NavList';
-import { Outlet } from 'react-router-dom';
 
 export interface SideBarNavProps {
   menu: typeof NavItems;
@@ -9,11 +7,11 @@ export interface SideBarNavProps {
 
 const SideBarNav = (props: SideBarNavProps) => {
   return (
-    <Navlist>
+    <nav className='space-y-1.5 mt-2'>
       {props.menu.map((e) => (
         <SideBarItem item={e}></SideBarItem>
       ))}
-    </Navlist>
+    </nav>
   );
 };
 export default SideBarNav;

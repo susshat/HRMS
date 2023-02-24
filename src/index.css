@@ -1,3 +1,40 @@
+/* / / primary /  */
+@import '@radix-ui/colors/indigo.css'; 
+@import '@radix-ui/colors/indigoDark.css';
+@import '@radix-ui/colors/indigoA.css';
+@import '@radix-ui/colors/indigoDarkA.css';
+/* / gray / */
+ @import '@radix-ui/colors/slate.css';
+@import '@radix-ui/colors/slateDark.css';
+@import '@radix-ui/colors/slateA.css';
+@import '@radix-ui/colors/slateDarkA.css';
+/* / error / */
+ @import '@radix-ui/colors/red.css';
+@import '@radix-ui/colors/redDark.css';
+/* / success / */
+ @import '@radix-ui/colors/green.css';
+@import '@radix-ui/colors/greenDark.css';
+/* / warning /  */
+@import '@radix-ui/colors/amber.css';
+@import '@radix-ui/colors/amberDark.css';
+/* / info / */
+ @import '@radix-ui/colors/blue.css';
+@import '@radix-ui/colors/blueDark.css';
+/* / base / */
+ @import '@radix-ui/colors/whiteA.css';
+@import '@radix-ui/colors/blackA.css';
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+    html{
+        @apply text-[13px] font-system text-gray-12;
+
+    }
+    button{
+        @apply focus:outline-none;
+    }
+}
