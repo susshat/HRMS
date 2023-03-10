@@ -39,7 +39,7 @@ export const AppTextField = forwardRef(
           <div>
             <TextField.Label
               htmlFor={id}
-              className={classNames('font-semibold', labelClassName)}
+              className={classNames('font-medium', labelClassName)}
               {...labelProps}
             >
               {label}

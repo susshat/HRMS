@@ -12,7 +12,7 @@ const createScale = (name) => ({
   11: `var(--${name}11)`,
   12: `var(--${name}12)`,
 });
-
+const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -41,7 +41,17 @@ module.exports = {
     },
   },
   plugins: [
-
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          size: (value) => ({
+            width: value,
+            height: value,
+          }),
+        },
+        { values: theme('width') }
+      );
+    }),
     require('@tailwindcss/forms'),
   ],
 }

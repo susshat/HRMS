@@ -3,6 +3,11 @@ import { MdKeyboardArrowDown, MdKeyboardArrowLeft } from 'react-icons/md';
 import { NavItems } from '../constants/navItems';
 import SideBarNav from './SidebarNav';
 import { OpenSidebar } from './Dashboard';
+import { Drawer } from './Drawer/Drawer';
+import classNames from 'classnames';
+import { CaretLeftIcon, CaretRightIcon } from '@radix-ui/react-icons';
+
+import * as Separator from '@radix-ui/react-separator';
 
 export type NavlistItemProps = ComponentProps<'li'> & {
   item: typeof NavItems[0];

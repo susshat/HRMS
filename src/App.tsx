@@ -3,7 +3,7 @@ import Dashboard from './components/Dashboard';
 import Login from './page/Login';
 import Profile from './page/Profile';
 
-import Register from './page/Register';
+import UpdateProfile from './components/UpdateProfile';
 
 function App() {
   return (
@@ -11,11 +11,11 @@ function App() {
       <Route path='/' element={<Dashboard />}>
         <Route path='profile'>
           <Route index element={<Profile />} />
-          <Route path='register' element={<Register />} />
+          <Route path='register' element={<UpdateProfile />} />
         </Route>
       </Route>
       <Route path='login' element={<Login />} />
-      <Route path='register' element={<Register />} />
+      <Route path='register' element={<UpdateProfile />} />
     </Routes>
   );
 }

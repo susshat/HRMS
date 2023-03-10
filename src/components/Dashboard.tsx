@@ -1,5 +1,5 @@
 import { NavItems } from '../constants/navItems';
-import { createContext, useState } from 'react';
+import { createContext, useRef, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { RiMenuUnfoldLine, RiMenuFoldLine } from 'react-icons/ri';
 import SideBarNav from './SidebarNav';
@@ -21,6 +21,10 @@ export const OpenSidebar = createContext({
   open: false,
 });
 
+export const ContainerContext = createContext<{
+  ref?: React.MutableRefObject<HTMLDivElement | null>;
+}>({});
+
 const Dashboard = () => {
   const navigate = useNavigate();
 
@@ -32,9 +36,11 @@ const Dashboard = () => {
     navigate('/profile');
   }
   const [open, setOpen] = useState(true);
+
+  const useScrollRef = useRef<HTMLDivElement | null>(null);
   return (
     <>
-      <div className='flex'>
+      <div className='flex '>
         <aside className='flex gap-6 items-center relative '>
           <div
             className={`bg-gray-6 min-h-screen ${open ? 'w-62' : 'w-16'} 
@@ -58,66 +64,9 @@ const Dashboard = () => {
             {open && (
               <div
                 className={`${open} flex justify-between mt-4 cursor-pointer`}
-              >
-                <DropdownMenu.Root>
-                  <DropdownMenu.Trigger asChild>
-                    <button className=' flex justify-between items-center bg-gray-8 bg-opacity-90 rounded-lg p-2 w-full'>
-                      <img
-                        className='h-auto w-8 mr-auto rounded-full mb-1'
-                        src='https://npg.si.edu/sites/default/files/blog_obama_martin_schoeller.jpg'
-                        alt=''
-                      />
-                      <h1 className='mr-auto'>Sushant Dangal</h1>
-                      <CaretRightIcon className='I h-4 ml-auto' />
-                    </button>
-                  </DropdownMenu.Trigger>
-                  <DropdownMenu.Portal>
-                    <DropdownMenu.Content className='bg-gray-1 min-w-[150px] p-2 space-y-0.5 rounded-md shadow-md '>
-                      <DropdownMenu.Item
-                        className='flex space-x-2 items-center rounded-md
-               hover:bg-gray-4   py-1.5 px-2 w-full'
-                        onClick={handleProfileClick}
-                        asChild
-                      >
-                        <button>
-                          <PersonIcon />
-                          <span>User Profile</span>
-                        </button>
-                      </DropdownMenu.Item>
-
-                      <DropdownMenu.Item
-                        className='flex space-x-2 items-center rounded-md
-               hover:bg-gray-4   py-1.5 px-2 w-full'
-                        asChild
-                        // onClick={handleProfileClick}
-                      >
-                        <button>
-                          <LockClosedIcon />
-                          <span>Change Password</span>
-                        </button>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Separator className='h-px bg-gray-7' />
-                      <DropdownMenu.Item
-                        className=' flex space-x-2 items-center  rounded-md
-               hover:bg-error-4 text-error-9  py-1.5 px-2 w-full'
-                        asChild
-                        onClick={handeLogoutClick}
-                      >
-                        <button>
-                          <ExitIcon />
-                          <span>Logout</span>
-                        </button>
-                      </DropdownMenu.Item>
-                    </DropdownMenu.Content>
-                  </DropdownMenu.Portal>
-                </DropdownMenu.Root>
-              </div>
+              ></div>
             )}
-            {open ? (
-              <hr className='mt-4 mb-2' />
-            ) : (
-              <hr className='mt-6 mb-1  w-8 ' />
-            )}
+            {!open && <hr className='mt-6 mb-1 w-8' />}
             {open && (
               <TextField.Root>
                 {(id) => (
@@ -141,19 +90,78 @@ const Dashboard = () => {
             </OpenSidebar.Provider>
           </div>
         </aside>
-        <div className='overflow-y-auto max-h-screen flex-1 relative'>
-          <header className=' bg-gray-4 p-4 sticky top-0'>
-            <div className='flex justify-end '>
-              <img
-                className='h-8 w-auto cursor-pointer'
-                src='http://hrms.channakyasoft.com/assets/HRMS.png'
-                alt='Channakya Software(dev team)'
-              />
-            </div>
-          </header>
+        <ContainerContext.Provider value={{ ref: useScrollRef }}>
+          <div
+            className='overflow-y-auto max-h-screen  flex-1 relative '
+            ref={useScrollRef}
+          >
+            <header className=' bg-gray-2 p-4 sticky top-0'>
+              <div className='flex justify-between items-center '>
+                <img
+                  className='h-8 w-auto cursor-pointer'
+                  src='http://hrms.channakyasoft.com/assets/HRMS.png'
+                  alt='Channakya Software(dev team)'
+                />
+                <div>
+                  <DropdownMenu.Root>
+                    <DropdownMenu.Trigger className='space-x-2' asChild>
+                      <button className='flex justify-between items-center  bg-opacity-90 rounded-lg  w-full'>
+                        <img
+                          className='h-auto w-8 mr-2 rounded-xl'
+                          src='https://npg.si.edu/sites/default/files/blog_obama_martin_schoeller.jpg'
+                          alt=''
+                        />
+                        <h1 className='mr-auto'>Sushant Dangal</h1>
+                        <CaretRightIcon className='I h-4 ml-auto' />
+                      </button>
+                    </DropdownMenu.Trigger>
+                    <DropdownMenu.Portal>
+                      <DropdownMenu.Content className='bg-gray-1 min-w-[150px] p-2 space-y-0.5 rounded-md shadow-md '>
+                        <DropdownMenu.Item
+                          className='flex space-x-2 items-center rounded-md
+               hover:bg-gray-4   py-1.5 px-2 w-full'
+                          onClick={handleProfileClick}
+                          asChild
+                        >
+                          <button>
+                            <PersonIcon />
+                            <span>User Profile</span>
+                          </button>
+                        </DropdownMenu.Item>
 
-          <Outlet />
-        </div>
+                        <DropdownMenu.Item
+                          className='flex space-x-2 items-center rounded-md
+               hover:bg-gray-4   py-1.5 px-2 w-full'
+                          asChild
+                          // onClick={handleProfileClick}
+                        >
+                          <button>
+                            <LockClosedIcon />
+                            <span>Change Password</span>
+                          </button>
+                        </DropdownMenu.Item>
+                        <DropdownMenu.Separator className='h-px bg-gray-7' />
+                        <DropdownMenu.Item
+                          className=' flex space-x-2 items-center  rounded-md
+               hover:bg-error-4 text-error-9  py-1.5 px-2 w-full'
+                          asChild
+                          onClick={handeLogoutClick}
+                        >
+                          <button>
+                            <ExitIcon />
+                            <span>Logout</span>
+                          </button>
+                        </DropdownMenu.Item>
+                      </DropdownMenu.Content>
+                    </DropdownMenu.Portal>
+                  </DropdownMenu.Root>
+                </div>
+              </div>
+            </header>
+
+            <Outlet />
+          </div>
+        </ContainerContext.Provider>
       </div>
     </>
   );
