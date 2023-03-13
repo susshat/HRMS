@@ -5,12 +5,14 @@ import SideBarNav from './SidebarNav';
 import { OpenSidebar } from './Dashboard';
 import { Drawer } from './Drawer/Drawer';
 import classNames from 'classnames';
-import { CaretLeftIcon, CaretRightIcon } from '@radix-ui/react-icons';
+import { CaretLeftIcon, CaretRightIcon, PlusIcon } from '@radix-ui/react-icons';
 
 import * as Separator from '@radix-ui/react-separator';
+import DrawerSection from './Drawer/DrawerSection/DrawerSection';
+import { Link } from 'react-router-dom';
 
 export type NavlistItemProps = ComponentProps<'li'> & {
-  item: typeof NavItems[0];
+  item: typeof NavItems;
 };
 
 const SideBarItem = ({ item, ...props }: NavlistItemProps) => {
@@ -19,37 +21,46 @@ const SideBarItem = ({ item, ...props }: NavlistItemProps) => {
 
   return (
     <>
-      {open ? (
-        'children' in item ? (
-          <button
-            className='flex justify-between items-center cursor-pointer  rounded-md
+      <Drawer.Root
+        isOpen={openNav}
+        className={classNames(
+          'h-screen  w-[220px] flex flex-col py-5 px-4 select-none',
+          {
+            'items-stretch w-[220px]': open,
+            'w-[20px] items-center': !open,
+          }
+        )}
+      >
+        <Drawer.Header className='relative '>
+          {/* <button onClick={() => toggle()}>
+            {openNav ? <CaretLeftIcon /> : <CaretRightIcon />}
+          </button> */}
+        </Drawer.Header>
+        <Drawer.Body>
+          {NavItems.map((menu, index) => (
+            <Drawer.Item
+              className='flex justify-start cursor-pointer  rounded-md hover:bg-gray-4 dark:text-white dark:hover:bg-grayA-4  py-1.5 px-2 w-full'
+              key={'general-' + index}
+            >
+              <Link to={menu.to}>
+                <div className='flex justify-between items-center space-x-4'>
+                  {menu.icon}
+                  {open ? <span>{menu.menuCaption}</span> : null}
+                </div>
+                {'children' in item && open ? (
+                  <Link
+                    to={menu.to}
+                    className=' items-center cursor-pointer  rounded-md
                hover:bg-gray-4 dark:text-white dark:hover:bg-grayA-4 py-1.5 px-2 w-full'
-            onClick={() => toggle()}
-          >
-            <span>{item.menuCaption}</span>
-            {openNav ? <MdKeyboardArrowDown /> : <MdKeyboardArrowLeft />}
-          </button>
-        ) : (
-          <button
-            className=' flex justify-between items-center cursor-pointer  rounded-md
-               hover:bg-gray-4 dark:text-white dark:hover:bg-grayA-4  py-1.5 px-2 w-full '
-          >
-            {(item as any).menuCaption}
-          </button>
-        )
-      ) : (
-        <button
-          className='flex justify-end items-center cursor-pointer
-            rounded-md hover:bg-gray-4 dark:text-white dark:hover:bg-grayA-4 '
-          // onClick={() => toggle()}
-        >
-          <div className='p-3'> {item.icon}</div>
-        </button>
-      )}
-
-      {'children' in item && openNav && open ? (
-        <SideBarNav menu={item.children as never} />
-      ) : null}
+                  >
+                    <PlusIcon className='size-4' />
+                  </Link>
+                ) : null}
+              </Link>
+            </Drawer.Item>
+          ))}
+        </Drawer.Body>
+      </Drawer.Root>
     </>
   );
 };

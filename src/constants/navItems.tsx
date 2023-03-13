@@ -15,7 +15,7 @@ export const NavItems = [
     menuId: 14,
     menuCaption: 'Dashboard',
     icon: <MdOutlineDashboardCustomize />,
-    to: '/employee',
+    to: '/',
   },
   {
     menuId: 14,

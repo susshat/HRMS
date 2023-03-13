@@ -7,10 +7,8 @@ export interface SideBarNavProps {
 
 const SideBarNav = (props: SideBarNavProps) => {
   return (
-    <nav className='space-y-1.5 mt-2'>
-      {props.menu.map((e) => (
-        <SideBarItem item={e}></SideBarItem>
-      ))}
+    <nav className=' mt-2'>
+      <SideBarItem item={props.menu}></SideBarItem>
     </nav>
   );
 };
