@@ -11,7 +11,7 @@ import UpdateProfile from '../components/UpdateProfile';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import * as HoverCard from '@radix-ui/react-hover-card';
 import { Portal } from '@radix-ui/react-dropdown-menu';
-import ProfileCard from '../components/profile/profileCard';
+import ProfileCard from '../components/Profile/profileCard';
 
 const Profile = () => {
   const navigate = useNavigate();

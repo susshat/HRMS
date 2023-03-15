@@ -1,6 +1,4 @@
 import { ComponentProps, createContext } from 'react';
-import classnames from 'classnames';
-
 export const DrawerContext = createContext({
   isOpen: false,
 });

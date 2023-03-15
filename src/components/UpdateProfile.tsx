@@ -1,7 +1,7 @@
 import * as Tabs from '@radix-ui/react-tabs';
-import BasiInfo from './profile/UpdateProfile/BasicInfo';
-import Address from './profile/UpdateProfile/Address';
-import Relationship from './profile/UpdateProfile/Relationship';
+import Address from './Profile/UpdateProfile/Address';
+import BasiInfo from './Profile/UpdateProfile/BasicInfo';
+import Relationship from './Profile/UpdateProfile/Relationship';
 
 const TAB_ITEMS = [
   { label: 'Basic', val: 'basicinfo', content: <BasiInfo /> },

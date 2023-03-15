@@ -3,18 +3,22 @@ import { createContext, useRef, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { RiMenuUnfoldLine, RiMenuFoldLine } from 'react-icons/ri';
 import SideBarNav from './SidebarNav';
+
+import * as Separator from '@radix-ui/react-separator';
 import {
   MagnifyingGlassIcon,
   CaretRightIcon,
   PersonIcon,
   ExitIcon,
   LockClosedIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from '@radix-ui/react-icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { Outlet, useNavigate } from 'react-router-dom';
 import Profile from '../page/Profile';
-import { TextField } from './TextField';
+import { TextField } from './Textfield/TextField';
 import classNames from 'classnames';
 
 export const OpenSidebar = createContext({
@@ -46,16 +50,17 @@ const Dashboard = () => {
             className={`bg-gray-6 min-h-screen ${open ? 'w-62' : 'w-16'} 
              text-gray-100 px-4`}
           >
-            <div className=' flex justify-end mt-2'>
+            <div
+              className='flex items-end cursor-pointer rounded-md mt-4
+                py-1.5 px-2 w-full'
+            >
               {open ? (
-                <RiMenuFoldLine
-                  size={26}
+                <ChevronLeftIcon
                   className='cursor-pointer'
                   onClick={() => setOpen(!open)}
                 />
               ) : (
-                <RiMenuUnfoldLine
-                  size={26}
+                <ChevronRightIcon
                   className='cursor-pointer'
                   onClick={() => setOpen(!open)}
                 />
@@ -66,10 +71,12 @@ const Dashboard = () => {
                 className={`${open} flex justify-between mt-4 cursor-pointer`}
               ></div>
             )}
-            {!open && <hr className='mt-6 mb-1 w-8' />}
+            {!open && (
+              <Separator.Root className='bg-gray-10  data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px my-[15px]' />
+            )}
             {open && (
               <TextField.Root>
-                {(id) => (
+                {(id: any) => (
                   <div className='flex pl-2 bg-grayA-3 rounded-md items-center space-x-2 group focus-within:bg-grayA-4'>
                     <TextField.PrefixSuffix className='text-gray-11 group-focus-within:text-gray-11'>
                       <MagnifyingGlassIcon />
